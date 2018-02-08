@@ -12,7 +12,7 @@
     @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You searched for " + Model.Search + " found")
     @Model.Products.TotalItemCount products
     @Html.ActionLink("Create New", "Create")
-    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+    @using (Html.BeginRouteForm("ProductsIndex", FormMethod.Get))
     {
         <label>Filter by category:</label>
         @Html.DropDownListFor(vm => vm.Category, Model.CatFilterItems, "All");
