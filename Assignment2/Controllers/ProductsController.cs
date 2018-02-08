@@ -18,27 +18,42 @@ namespace Assignment2.Controllers
         // GET: Products
         public ActionResult Index(string category, string search)
         {
+            //instantiate a new view model
+            ProductIndexViewModel viewModel = new ProductIndexViewModel();
             var products = db.Products.Include(p => p.Category);
 
-            //if argument category is not empty
-            if(!String.IsNullOrEmpty(category))
+            //find the products where either the product name field contains search,the product //description contains search, or the product's category name contains search
+            if (!String.IsNullOrEmpty(search))
             {
-                //see if product category matches this category, if it does then p
+                products = products.Where(p => p.Name.Contains(search) ||
+                p.Desc.Contains(search) ||
+                p.Category.Name.Contains(search));
+                //ViewBag.Search = search;
+                viewModel.Search = search;
+            }
+            //group search results into categories and count how many items in each category
+            viewModel.CatsWithCount = from matchingProducts in products
+                                      where
+                                      matchingProducts.CID != null
+                                      group matchingProducts by
+                                      matchingProducts.Category.Name into
+                                      catGroup
+                                      select new CategoryWithCount()
+                                      {
+                                          CategoryName = catGroup.Key,
+                                          ProductCount = catGroup.Count()
+                                      };
+            // var categories = products.OrderBy(p => p.Category.Name).Select(p => //p.Category.Name).Distinct();
+            if (!String.IsNullOrEmpty(category))
+            {
                 products = products.Where(p => p.Category.Name == category);
             }
-
-            if(!String.IsNullOrEmpty(search))
-            {
-                products = products.Where(p => p.Name.Contains(search) || p.Desc.Contains(search) || p.Category.Name.Contains(search));
-            }
-
-            if(!String.IsNullOrEmpty(search))
-            {
-
-            }
-            //finally sort by the product name
-            return View(products.OrderBy(p => p.Name).ToList());
+            //   ViewBag.Category = new SelectList(categories);
+            //   return View(products.OrderBy(p=>p.PName).ToList());
+            viewModel.Products = products;
+            return View(viewModel);
         }
+
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
