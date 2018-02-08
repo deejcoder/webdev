@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201802072302430_UpdateAss2.Designer.cs">
       <DependentUpon>201802072302430_UpdateAss2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802081039572_field-valid.cs" />
+    <Compile Include="Migrations\201802081039572_field-valid.Designer.cs">
+      <DependentUpon>201802081039572_field-valid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -309,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802072302430_UpdateAss2.resx">
       <DependentUpon>201802072302430_UpdateAss2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802081039572_field-valid.resx">
+      <DependentUpon>201802081039572_field-valid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -112,10 +112,15 @@ namespace Assignment2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Category category = db.Categories.Find(id);
+            foreach (var p in category.Products)
+            {
+                p.CID = 0;
+            }
             db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {
