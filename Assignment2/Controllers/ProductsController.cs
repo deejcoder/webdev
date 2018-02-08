@@ -16,10 +16,28 @@ namespace Assignment2.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string category, string search)
         {
             var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
+
+            //if argument category is not empty
+            if(!String.IsNullOrEmpty(category))
+            {
+                //see if product category matches this category, if it does then p
+                products = products.Where(p => p.Category.Name == category);
+            }
+
+            if(!String.IsNullOrEmpty(search))
+            {
+                products = products.Where(p => p.Name.Contains(search) || p.Desc.Contains(search) || p.Category.Name.Contains(search));
+            }
+
+            if(!String.IsNullOrEmpty(search))
+            {
+
+            }
+            //finally sort by the product name
+            return View(products.OrderBy(p => p.Name).ToList());
         }
 
         // GET: Products/Details/5
