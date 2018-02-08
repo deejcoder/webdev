@@ -3,35 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
-public class ProductIndexViewModel
+namespace Assignment2.ViewModels
 {
-    public IQueryable<Product> Products { get; set; }
-    public string Search { get; set; }
-    public IEnumerable<CategoryWithCount> CatsWithCount { get; set; }
-    public string Category { get; set; }
-    public IEnumerable<SelectListItem> CatFilterItems
+    public class ProductIndexViewModel
     {
-        get
+        public IQueryable<Product> Products { get; set; }
+        public string Search { get; set; }
+        public IEnumerable<CategoryWithCount> CatsWithCount { get; set; }
+        public string Category { get; set; }
+        public IEnumerable<SelectListItem> CatFilterItems
         {
-            var allCats = CatsWithCount.Select(cc => new SelectListItem
+            get
             {
-                Value = cc.CategoryName,
-                Text = cc.CatNameWithCount
-            });
-            return allCats;
+                var allCats = CatsWithCount.Select(cc => new SelectListItem
+                {
+                    Value = cc.CategoryName,
+                    Text = cc.CatNameWithCount
+                });
+                return allCats;
+            }
         }
-    }
 
-}
-public class CategoryWithCount
-{
-    public int ProductCount { get; set; }
-    public string CategoryName { get; set; }
-    public string CatNameWithCount
+    }
+    public class CategoryWithCount
     {
-        get
+        public int ProductCount { get; set; }
+        public string CategoryName { get; set; }
+        public string CatNameWithCount
         {
-            return CategoryName + " (" + ProductCount.ToString() + ")";
+            get
+            {
+                return CategoryName + " (" + ProductCount.ToString() + ")";
+            }
         }
     }
 }

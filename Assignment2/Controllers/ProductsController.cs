@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Assignment2.Models;
 using Assignment2.OSDB;
+using Assignment2.ViewModels;
 
 namespace Assignment2.Controllers
 {
@@ -25,10 +26,7 @@ namespace Assignment2.Controllers
             //find the products where either the product name field contains search,the product //description contains search, or the product's category name contains search
             if (!String.IsNullOrEmpty(search))
             {
-                products = products.Where(p => p.Name.Contains(search) ||
-                p.Desc.Contains(search) ||
-                p.Category.Name.Contains(search));
-                //ViewBag.Search = search;
+                products = products.Where(p => p.Name.Contains(search) || p.Desc.Contains(search) || p.Category.Name.Contains(search));
                 viewModel.Search = search;
             }
             //group search results into categories and count how many items in each category
@@ -43,16 +41,17 @@ namespace Assignment2.Controllers
                                           CategoryName = catGroup.Key,
                                           ProductCount = catGroup.Count()
                                       };
-            // var categories = products.OrderBy(p => p.Category.Name).Select(p => //p.Category.Name).Distinct();
+            
+            //if user only wants to view a single category
             if (!String.IsNullOrEmpty(category))
             {
                 products = products.Where(p => p.Category.Name == category);
             }
-            //   ViewBag.Category = new SelectList(categories);
-            //   return View(products.OrderBy(p=>p.PName).ToList());
+
             viewModel.Products = products;
             return View(viewModel);
         }
+
 
 
         // GET: Products/Details/5
