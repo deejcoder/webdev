@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Assignment2.Models;
 using Assignment2.OSDB;
 using Assignment2.ViewModels;
+using PagedList;
 
 namespace Assignment2.Controllers
 {
@@ -17,7 +18,7 @@ namespace Assignment2.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Products
-        public ActionResult Index(string category, string search)
+        public ActionResult Index(string category, string search, string sortBy, int? page)
         {
             //instantiate a new view model
             ProductIndexViewModel viewModel = new ProductIndexViewModel();
@@ -46,9 +47,33 @@ namespace Assignment2.Controllers
             if (!String.IsNullOrEmpty(category))
             {
                 products = products.Where(p => p.Category.Name == category);
+                viewModel.Category = category;
             }
 
-            viewModel.Products = products;
+            switch(sortBy)
+            {
+                case "price_lowest":
+                    products = products.OrderBy(p => p.Price);
+                    break;
+                case "price_highest":
+                    products = products.OrderByDescending(p => p.Price);
+                    break;
+                default:
+                    products = products.OrderBy(p => p.Name);
+                    break;
+            }
+
+            const int PageItems = 5;
+            int currentPage = (page ?? 1);
+
+            viewModel.Products = products.ToPagedList(currentPage, PageItems);
+            viewModel.SortBy = sortBy;
+
+            viewModel.Sorts = new Dictionary<string, string>
+            {
+                {"Price low to high", "price_lowest" },
+                {"Price high to low", "price_highest" }
+            };
             return View(viewModel);
         }
 
