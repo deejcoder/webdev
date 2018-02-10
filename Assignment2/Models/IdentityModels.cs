@@ -29,7 +29,7 @@ namespace Assignment2.Models
         {
             //set the database initializer which is run once during application start
             //This seeds teh database with admin user credentials and admin role
-            Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+            Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitiazer());
         }
 
 

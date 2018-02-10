@@ -132,8 +132,8 @@ namespace Assignment2
         {
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
-            const string name = "admin@sportsrus.com";
-            const string password = "admin";
+            const string name = "admin@admin.com";
+            const string password = "Admin_1";
             const string roleName = "Admin";
 
             //Create Role Admin if it does not exist
