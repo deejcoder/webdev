@@ -114,10 +114,12 @@ namespace Assignment2.Controllers
             Category category = db.Categories.Find(id);
             foreach (var p in category.Products)
             {
-                p.CID = 0;
+                p.CID = null;
             }
+
             db.Categories.Remove(category);
             db.SaveChanges();
+            
             return RedirectToAction("Index");
         }
 

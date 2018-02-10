@@ -10,10 +10,10 @@ namespace Assignment2.Models
         public int ImageNumber { get; set; }
 
         //ProductID
-        public int PID { get; set; }
+        public int? PID { get; set; }
 
         //ProductImageID
-        public int PImageID { get; set; }
+        public int? PImageID { get; set; }
 
         public virtual Product Product { get; set; }
         public virtual ProductImage ProductImage { get; set; }

@@ -263,26 +263,36 @@ namespace Assignment2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //find the image being deleted
             ProductImage productImage = db.ProductImages.Find(id);
             Product product = db.Products.Find(id);
             var mappings = product.ProductImageMappings.Where(pim => pim.PImageID == id);
+
             foreach (var mapping in mappings)
             {
                 //find all mappings for any product containing this image
                 var mappingsToUpdate = db.ProductImageMappings.Where(pim => pim.PID ==
                 mapping.PID);
+
                 //for each image in each product change its imagenumber to one lower if it is higher
                 //than the current image
+
                 foreach (var mappingToUpdate in mappingsToUpdate)
                 {
                     if (mappingToUpdate.ImageNumber > mapping.ImageNumber)
                     {
                         mappingToUpdate.ImageNumber--;
+                        
                     }
                 }
+
+                //remove FK values!
+                mapping.PImageID = null;
+
             }
             System.IO.File.Delete(Request.MapPath(Constants.ProductImagePath + productImage.FileName));
             System.IO.File.Delete(Request.MapPath(Constants.ProductThumbnailPath + productImage.FileName));
+
             db.ProductImages.Remove(productImage);
             db.SaveChanges();
             return RedirectToAction("Index");

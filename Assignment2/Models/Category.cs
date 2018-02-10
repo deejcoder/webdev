@@ -8,6 +8,6 @@ namespace Assignment2.Models
     {
         public int CID { get; set; }
         public string Name { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
