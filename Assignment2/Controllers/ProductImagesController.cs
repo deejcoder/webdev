@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -108,6 +109,7 @@ namespace Assignment2.Controllers
 
             bool allValid = true;
             string inValidFiles = "";
+            db.Database.Log = sql => Trace.WriteLine(sql);
 
             //no files or too many files?
             if (files[0] == null)
@@ -182,6 +184,7 @@ namespace Assignment2.Controllers
                         {
                             duplicateFiles += ", " + file.FileName;
                             duplicates = true;
+                            db.Entry(productToAdd).State = EntityState.Detached;
                         }
                         else
                         {
