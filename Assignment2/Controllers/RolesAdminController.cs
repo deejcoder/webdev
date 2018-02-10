@@ -1,12 +1,19 @@
 ﻿using System;
+using System.Net;
+using System.Threading.Tasks;
+using Assignment2.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using static Assignment2.ViewModels.AdminViewModel;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Assignment2.Controllers
 {
+
     public class RolesAdminController : Controller
     {
         public RolesAdminController()
@@ -51,10 +58,28 @@ namespace Assignment2.Controllers
         }
 
         // GET: RolesAdmin/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var role = await RoleManager.FindByIdAsync(id);
+            // Get the list of Users in this Role
+            var users = new List<ApplicationUser>();
+            // Get the list of Users in this Role
+            foreach (var user in UserManager.Users.ToList())
+            {
+                if (await UserManager.IsInRoleAsync(user.Id, role.Name))
+                {
+                    users.Add(user);
+                }
+            }
+            ViewBag.Users = users;
+            ViewBag.UserCount = users.Count();
+            return View(role);
         }
+
 
         // GET: RolesAdmin/Create
         public ActionResult Create()
@@ -64,62 +89,98 @@ namespace Assignment2.Controllers
 
         // POST: RolesAdmin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(RoleViewModel roleViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                var role = new IdentityRole(roleViewModel.Name);
+                var roleresult = await RoleManager.CreateAsync(role);
+                if (!roleresult.Succeeded)
+                {
+                    ModelState.AddModelError("", roleresult.Errors.First());
+                    return View();
+                }
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: RolesAdmin/Edit/5
-        public ActionResult Edit(int id)
-        {
             return View();
         }
+
+
+        // GET: RolesAdmin/Edit/5
+        public async Task<ActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var role = await RoleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                return HttpNotFound();
+            }
+            RoleViewModel roleModel = new RoleViewModel { ID = role.Id, Name = role.Name };
+            return View(roleModel);
+        }
+
 
         // POST: RolesAdmin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(RoleViewModel roleModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                var role = await RoleManager.FindByIdAsync(roleModel.ID);
+                role.Name = roleModel.Name;
+                await RoleManager.UpdateAsync(role);
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: RolesAdmin/Delete/5
-        public ActionResult Delete(int id)
-        {
             return View();
         }
 
-        // POST: RolesAdmin/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        // GET: RolesAdmin/Delete/5
+        public async Task<ActionResult> Delete(string id)
         {
-            try
+            if (id == null)
             {
-                // TODO: Add delete logic here
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var role = await RoleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                return HttpNotFound();
+            }
+            return View(role);
+        }
 
+
+        // POST: RolesAdmin/Delete/5
+        // POST: RolesAdmin/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var role = await RoleManager.FindByIdAsync(id);
+                if (role == null)
+                {
+                    return HttpNotFound();
+                }
+                IdentityResult result = await RoleManager.DeleteAsync(role);
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View();
+                }
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
+
     }
 }
