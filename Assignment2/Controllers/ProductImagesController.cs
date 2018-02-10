@@ -286,9 +286,6 @@ namespace Assignment2.Controllers
                     }
                 }
 
-                //remove FK values!
-                mapping.PImageID = null;
-
             }
             System.IO.File.Delete(Request.MapPath(Constants.ProductImagePath + productImage.FileName));
             System.IO.File.Delete(Request.MapPath(Constants.ProductThumbnailPath + productImage.FileName));

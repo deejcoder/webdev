@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -46,9 +46,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -206,57 +203,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802072156204_InitialCreate.cs" />
-    <Compile Include="Migrations\201802072156204_InitialCreate.Designer.cs">
-      <DependentUpon>201802072156204_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201802100912517_seed.cs" />
+    <Compile Include="Migrations\201802100912517_seed.Designer.cs">
+      <DependentUpon>201802100912517_seed.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802072302430_UpdateAss2.cs" />
-    <Compile Include="Migrations\201802072302430_UpdateAss2.Designer.cs">
-      <DependentUpon>201802072302430_UpdateAss2.cs</DependentUpon>
+    <Compile Include="Migrations\201802100915599_tmp_remove_regex.cs" />
+    <Compile Include="Migrations\201802100915599_tmp_remove_regex.Designer.cs">
+      <DependentUpon>201802100915599_tmp_remove_regex.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802081039572_field-valid.cs" />
-    <Compile Include="Migrations\201802081039572_field-valid.Designer.cs">
-      <DependentUpon>201802081039572_field-valid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802082126395_data-valid-category.cs" />
-    <Compile Include="Migrations\201802082126395_data-valid-category.Designer.cs">
-      <DependentUpon>201802082126395_data-valid-category.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802082130116_field-valid-categories-2.cs" />
-    <Compile Include="Migrations\201802082130116_field-valid-categories-2.Designer.cs">
-      <DependentUpon>201802082130116_field-valid-categories-2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802082131012_field-valid-fix-categories.cs" />
-    <Compile Include="Migrations\201802082131012_field-valid-fix-categories.Designer.cs">
-      <DependentUpon>201802082131012_field-valid-fix-categories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802082320487_productimages.cs" />
-    <Compile Include="Migrations\201802082320487_productimages.Designer.cs">
-      <DependentUpon>201802082320487_productimages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802092304408_unique-files.cs" />
-    <Compile Include="Migrations\201802092304408_unique-files.Designer.cs">
-      <DependentUpon>201802092304408_unique-files.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802100229468_productimagemapping.cs" />
-    <Compile Include="Migrations\201802100229468_productimagemapping.Designer.cs">
-      <DependentUpon>201802100229468_productimagemapping.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802100347016_productimages-mapping.cs" />
-    <Compile Include="Migrations\201802100347016_productimages-mapping.Designer.cs">
-      <DependentUpon>201802100347016_productimages-mapping.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802100503235_product_image_mapping_nulls.cs" />
-    <Compile Include="Migrations\201802100503235_product_image_mapping_nulls.Designer.cs">
-      <DependentUpon>201802100503235_product_image_mapping_nulls.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802100737494_virtualCategoryCollection.cs" />
-    <Compile Include="Migrations\201802100737494_virtualCategoryCollection.Designer.cs">
-      <DependentUpon>201802100737494_virtualCategoryCollection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802100819002_seed.cs" />
-    <Compile Include="Migrations\201802100819002_seed.Designer.cs">
-      <DependentUpon>201802100819002_seed.cs</DependentUpon>
+    <Compile Include="Migrations\201802100916407_readd_regex.cs" />
+    <Compile Include="Migrations\201802100916407_readd_regex.Designer.cs">
+      <DependentUpon>201802100916407_readd_regex.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -298,7 +255,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -368,44 +327,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802072156204_InitialCreate.resx">
-      <DependentUpon>201802072156204_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802100912517_seed.resx">
+      <DependentUpon>201802100912517_seed.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802072302430_UpdateAss2.resx">
-      <DependentUpon>201802072302430_UpdateAss2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802100915599_tmp_remove_regex.resx">
+      <DependentUpon>201802100915599_tmp_remove_regex.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802081039572_field-valid.resx">
-      <DependentUpon>201802081039572_field-valid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802082126395_data-valid-category.resx">
-      <DependentUpon>201802082126395_data-valid-category.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802082130116_field-valid-categories-2.resx">
-      <DependentUpon>201802082130116_field-valid-categories-2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802082131012_field-valid-fix-categories.resx">
-      <DependentUpon>201802082131012_field-valid-fix-categories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802082320487_productimages.resx">
-      <DependentUpon>201802082320487_productimages.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802092304408_unique-files.resx">
-      <DependentUpon>201802092304408_unique-files.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802100229468_productimagemapping.resx">
-      <DependentUpon>201802100229468_productimagemapping.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802100347016_productimages-mapping.resx">
-      <DependentUpon>201802100347016_productimages-mapping.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802100503235_product_image_mapping_nulls.resx">
-      <DependentUpon>201802100503235_product_image_mapping_nulls.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802100737494_virtualCategoryCollection.resx">
-      <DependentUpon>201802100737494_virtualCategoryCollection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802100819002_seed.resx">
-      <DependentUpon>201802100819002_seed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802100916407_readd_regex.resx">
+      <DependentUpon>201802100916407_readd_regex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -440,8 +369,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.2.1\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
