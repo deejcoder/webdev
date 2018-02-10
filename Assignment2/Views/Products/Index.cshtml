@@ -44,25 +44,40 @@
 
     @foreach (var item in Model.Products)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PID })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @if (item.ProductImageMappings != null && item.ProductImageMappings.Any())
+            {
+                <a href="@Url.Action("Details", new {id= item.PID})">
+                    <img src="@(Url.Content(Constants.ProductImagePath) + item.ProductImageMappings.OrderBy(pim=>pim.ImageNumber).ElementAt(0).ProductImage.FileName)" />
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Details", new { id = item.PID })">
+                    <img src="@(Url.Content(Constants.NO_IMAGE_IMAGE))" />
+                </a>
+            }
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PID })
+        </td>
+    </tr>
     }
 
 </table>

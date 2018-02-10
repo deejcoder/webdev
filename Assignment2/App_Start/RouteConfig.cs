@@ -40,6 +40,13 @@ namespace Assignment2
                 url: "Products",
                 defaults: new { controller = "Products", action = "Index" }
             );
+
+            routes.MapRoute(
+                name: "CategoriesIndex",
+                url: "Categories",
+                defaults: new { controller = "Categories", action = "Index" }
+                
+            );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

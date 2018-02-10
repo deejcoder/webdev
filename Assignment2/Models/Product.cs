@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Assignment2.Models;
+﻿
+using System.Collections.Generic;
 
 namespace Assignment2.Models
 {
@@ -11,5 +11,6 @@ namespace Assignment2.Models
         public int Price { get; set; }
         public int? CID { get; set; } //can be NULL
         public virtual Category Category { get; set; }
+        public virtual ICollection<ProductImageMapping> ProductImageMappings { get; set; }
     }
 }
