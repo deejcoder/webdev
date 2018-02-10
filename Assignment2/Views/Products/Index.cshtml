@@ -49,13 +49,13 @@
             @if (item.ProductImageMappings != null && item.ProductImageMappings.Any())
             {
                 <a href="@Url.Action("Details", new {id= item.PID})">
-                    <img src="@(Url.Content(Constants.ProductImagePath) + item.ProductImageMappings.OrderBy(pim=>pim.ImageNumber).ElementAt(0).ProductImage.FileName)" />
+                    <img style="max-width:150px;"src="@(Url.Content(Constants.ProductImagePath) + item.ProductImageMappings.OrderBy(pim=>pim.ImageNumber).ElementAt(0).ProductImage.FileName)" />
                 </a>
             }
             else
             {
                 <a href="@Url.Action("Details", new { id = item.PID })">
-                    <img src="@(Url.Content(Constants.NO_IMAGE_IMAGE))" />
+                    <img style="max-width:150px;" src="@(Url.Content(Constants.NO_IMAGE_IMAGE))" />
                 </a>
             }
         </td>
