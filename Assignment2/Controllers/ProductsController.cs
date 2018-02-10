@@ -63,10 +63,9 @@ namespace Assignment2.Controllers
                     break;
             }
 
-            const int PageItems = 5;
             int currentPage = (page ?? 1);
 
-            viewModel.Products = products.ToPagedList(currentPage, PageItems);
+            viewModel.Products = products.ToPagedList(currentPage, Constants.PagedItems);
             viewModel.SortBy = sortBy;
 
             viewModel.Sorts = new Dictionary<string, string>

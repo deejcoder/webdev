@@ -7,6 +7,7 @@ namespace Assignment2.OSDB
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
     }
 }
