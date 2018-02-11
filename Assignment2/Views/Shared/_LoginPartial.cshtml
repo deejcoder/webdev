@@ -1,4 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
+
+<!-- Let's use a div container which is a block-level element to have login partial on its own line -->
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

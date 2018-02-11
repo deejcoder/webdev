@@ -23,8 +23,15 @@ namespace Assignment2.Controllers
         public ActionResult Index(string category, string search, string sortBy, int? page)
         {
             //instantiate a new view model
-            ProductIndexViewModel viewModel = new ProductIndexViewModel();
+            HomeIndexViewModel viewModel = new HomeIndexViewModel();
             var products = db.Products.Include(p => p.Category);
+
+
+
+            //Store all categories in the ViewBag this is for the side navigation !
+            viewModel.Categories = db.Categories.ToList();
+
+
 
             //find the products where either the product name field contains search,the product //description contains search, or the product's category name contains search
             if (!String.IsNullOrEmpty(search))
@@ -75,6 +82,7 @@ namespace Assignment2.Controllers
                 {"Price low to high", "price_lowest" },
                 {"Price high to low", "price_highest" }
             };
+            
             return View(viewModel);
         }
 

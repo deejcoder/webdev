@@ -1,0 +1,14 @@
+﻿@model Assignment2.ViewModels.HomeIndexViewModel
+
+<nav id="cat-sidenav">
+    <h4>Categories</h4>
+    <ul>
+        @foreach (var category in Model.Categories)
+        {
+            <li>
+                @Html.ActionLink(category.Name, "Index", "Products", new { category = category.Name }, null)
+            </li>
+        }
+    </ul>
+
+</nav>

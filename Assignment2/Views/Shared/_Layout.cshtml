@@ -7,20 +7,32 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+
+
+    <link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-static-top ">
         <div class="container">
-br
+
             <div class="navbar-header">
+                <div class="heading-text">
+                    @Html.ActionLink("Sporco", "Index", "Home", new { area = "" }, new { @class = "navbar-brand header" })
+                </div>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+
+
             </div>
+
             <div class="navbar-collapse collapse">
+
+
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.RouteLink("View Categories", "CategoriesIndex")</li>
@@ -35,14 +47,15 @@ br
                 </ul>
 
                 @using (Html.BeginRouteForm("ProductsIndex", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
-            {
-                <div class="form-group">
-                    @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Products" })
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-        }
+                {
+                    <div class="form-group">
+                        @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Products" })
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                }
 
                 @Html.Partial("_LoginPartial")
+
             </div>
         </div>
     </div>
@@ -56,6 +69,7 @@ br
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="@Url.Content("~/Scripts/navbar-scroll.js")"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

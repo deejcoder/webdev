@@ -1,0 +1,50 @@
+﻿.table tr:not(:first-of-type):hover {
+    background-color: #ededed;
+}
+
+
+.navbar {
+    position:fixed;
+    width:100%;
+}
+
+
+
+#pagecontent {
+    margin-left: calc(15% + 50px) !important;
+}
+
+
+
+#cat-sidenav {
+    position:absolute;
+    float: left;
+    width: 180px;
+    padding:20px;
+    list-style-type:none;
+}
+
+.navbar-scrolled {
+    transition: background-color ease-in 500ms;
+    background-color: #dbdbdb !important;
+    color:#222222 !important;
+}
+
+.navbar-scrolled li {
+    display:none;
+}
+
+.navbar {
+    background-color: #222222;
+    border: none;
+    padding-top:20px;
+}
+
+.body-content {
+    position:relative;
+    top:150px !important;
+}
+
+.header {
+    font-size:38px;
+}

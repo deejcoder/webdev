@@ -7,7 +7,7 @@ using PagedList;
 
 namespace Assignment2.ViewModels
 {
-    public class ProductIndexViewModel
+    public class HomeIndexViewModel
     {
         public IPagedList<Product> Products { get; set; }
         //public IQueryable<Product> Products { get; set; }
@@ -17,6 +17,8 @@ namespace Assignment2.ViewModels
         public string Category { get; set; }
         public string SortBy { get; set; }
         public Dictionary<string, string> Sorts { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
+
         public IEnumerable<SelectListItem> CatFilterItems
         {
             get
