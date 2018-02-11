@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Assignment2.Controllers
 {
-
+    [Authorize(Roles ="Admin")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()

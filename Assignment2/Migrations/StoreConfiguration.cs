@@ -5,14 +5,14 @@ namespace Assignment2.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Assignment2.Models.ApplicationDbContext>
+    internal sealed class StoreConfiguration : DbMigrationsConfiguration<Assignment2.OSDB.StoreContext>
     {
-        public Configuration()
+        public StoreConfiguration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Assignment2.Models.ApplicationDbContext context)
+        protected override void Seed(Assignment2.OSDB.StoreContext context)
         {
             //  This method will be called after migrating to the latest version.
 

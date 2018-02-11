@@ -7,13 +7,13 @@ namespace Assignment2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class seed : IMigrationMetadata
+    public sealed partial class updatestore : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(seed));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updatestore));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802100912517_seed"; }
+            get { return "201802110534540_updatestore"; }
         }
         
         string IMigrationMetadata.Source

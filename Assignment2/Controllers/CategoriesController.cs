@@ -16,6 +16,7 @@ namespace Assignment2.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Categories
+        [AllowAnonymous]
         public ActionResult Index()
         {
             //Order by name

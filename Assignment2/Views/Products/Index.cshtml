@@ -11,7 +11,11 @@
 <p>
     @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "You searched for " + Model.Search + " found")
     @Model.Products.TotalItemCount products
-    @Html.ActionLink("Create New", "Create")
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+
     @using (Html.BeginRouteForm("ProductsIndex", FormMethod.Get))
     {
         <label>Filter by category:</label>
@@ -47,17 +51,17 @@
     <tr>
         <td>
             @if (item.ProductImageMappings != null && item.ProductImageMappings.Any())
-            {
-                <a href="@Url.Action("Details", new {id= item.PID})">
-                    <img style="max-width:150px;"src="@(Url.Content(Constants.ProductImagePath) + item.ProductImageMappings.OrderBy(pim=>pim.ImageNumber).ElementAt(0).ProductImage.FileName)" />
-                </a>
-            }
-            else
-            {
-                <a href="@Url.Action("Details", new { id = item.PID })">
-                    <img style="max-width:150px;" src="@(Url.Content(Constants.NO_IMAGE_IMAGE))" />
-                </a>
-            }
+        {
+            <a href="@Url.Action("Details", new {id= item.PID})">
+                <img style="max-width:150px;" src="@(Url.Content(Constants.ProductImagePath) + item.ProductImageMappings.OrderBy(pim=>pim.ImageNumber).ElementAt(0).ProductImage.FileName)" />
+            </a>
+    }
+    else
+    {
+        <a href="@Url.Action("Details", new { id = item.PID })">
+            <img style="max-width:150px;" src="@(Url.Content(Constants.NO_IMAGE_IMAGE))" />
+        </a>
+}
         </td>
 
         <td>
@@ -73,11 +77,21 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.PID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.PID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.PID })
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.PID })
+                @Html.Raw(" | ")
+                @Html.ActionLink("Delete", "Delete", new { id = item.PID })
+                @Html.Raw(" | ")
+            }
+            @Html.ActionLink("Details", "Details", new { id = item.PID })
         </td>
-    </tr>
+
+
+            
+
+        </tr>
     }
 
 </table>

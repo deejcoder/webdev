@@ -15,6 +15,7 @@ using Assignment2.OSDB;
 
 namespace Assignment2.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class ProductImagesController : Controller
     {
         private StoreContext db = new StoreContext();

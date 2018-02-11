@@ -6,9 +6,13 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -17,18 +21,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             <!-- pass on the category the user clicked on -->
             @Html.ActionLink(item.Name, "Index", "Products", new { category = item.Name }, null)
         </td>
+        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.CID })
+            @Html.Raw(" | ")
+            @Html.ActionLink("Delete", "Delete", new { id = item.CID })
         </td>
+
+        }
+
     </tr>
-}
+    }
 
 </table>
